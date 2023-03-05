@@ -33,3 +33,7 @@
 
 # Build
 build/
+# VSCode
+.vs/
+.obsidian/
+.vscode/
