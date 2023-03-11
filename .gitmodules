@@ -1,0 +1,3 @@
+[submodule "dependencies/cppp.libiconv"]
+	path = dependencies/cppp.libiconv
+	url = git@github.com:ChenPi11/cppp.libiconv.git
