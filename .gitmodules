@@ -1,3 +1,0 @@
-[submodule "dependencies/libiconv-cmake"]
-	path = dependencies/libiconv-cmake
-	url = git@github.com:ChenPi12/libiconv-cmake.git
