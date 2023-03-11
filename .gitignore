@@ -24,7 +24,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -33,7 +32,8 @@
 
 # Build
 build/
-# VSCode
+
+# Editor
 .vs/
 .obsidian/
 .vscode/
