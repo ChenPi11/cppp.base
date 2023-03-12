@@ -4,7 +4,6 @@ project(cppp.base)
 function(info MSG)
     message(NOTICE ${MSG})
 endfunction(info)
-
 function(warn MSG)
     message(WARNING ${MSG})
 endfunction(warn)
@@ -15,24 +14,21 @@ endfunction(error)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/bin)
+set(CMAKE_INCLUDE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/include)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-
 set(LIBICONV_DIR ${CMAKE_SOURCE_DIR}/dependencies/cppp.libiconv)
 
 info("Building cppp.libiconv")
 set(ICONV_BUILD_DIR ${CMAKE_BINARY_DIR}/build)
 add_subdirectory(${LIBICONV_DIR})
 
+include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_INCLUDE_OUTPUT_DIRECTORY})
 
-add_executable(myapp a.cpp)
-set_target_properties(myapp PROPERTIES OUTPUT_NAME "myapp")
-
-# 引入第三方库
-include_directories(${ICONV_BUILD_DIR}/include)
-
-target_link_libraries(myapp iconv.static)
-
+# Build
+file(GLOB SRC_LIST "${CMAKE_SOURCE_DIR}/src/**/*.cpp")
+file(GLOB INCLUDE_LIST "${CMAKE_SOURCE_DIR}/include/**/*.*")
+add_library(cppp.base STATIC ${SRC_LIST} ${INCLUDE_LIST})
